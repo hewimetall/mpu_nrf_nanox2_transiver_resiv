@@ -1,5 +1,6 @@
 #include "../lib/CLASSMPU6050.h"
 #include "Wire.h"
+#include <Arduino.h>
 MPU6050 mpu;
 void setup() {
         Serial.begin(9600);
@@ -12,10 +13,7 @@ void loop() {
         mpu.recordAccelRegisters();
         mpu.recordGyroRegisters();
 
-        mpu.pacet(0);
-        Serial.print(mpu.pacetTrinssiver);
-
-
+        mpu.pacet(1);
 
 
 }
