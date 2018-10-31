@@ -41,20 +41,17 @@ void setup()
         radio.openReadingPipe(0, rxAddr);
         radio.startListening();
         delay(100);
+				pinMode(A0, OUTPUT);  // установка режима дискретного вывода для A3
+digitalWrite(A0, 1000);   // установка низкого состояния на выходе A3
 
 }
 
 void loop()
-{
+{ int16_t ay_raw;
         if (radio.available())
         {
-          radio.read(&Pac.text, sizeof(Pac.text));
-					split();
-					Serial.print(Pac.e[0]);
-					Serial.print("-");
-					Serial.print(Pac.e[1]);					Serial.print("-");
-
-					Serial.print(Pac.e[2]);
-					Serial.print("\n");
+          radio.read(ay_raw, sizeof(ay_raw));
+					digitalWrite(A0, int(500+ay_raw/20));   // установка низкого состояния на выходе A3
+					Serial.print(ay_raw);Serial.print("\n");
         }
 }
